@@ -7,28 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <style>
-        .nav1 {
-    margin-bottom: 20px;
-    background-color: #FBAB7E;
-    background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
-    -webkit-box-shadow: 0px 19px 40px -16px rgba(34, 60, 80, 0.2);
-    -moz-box-shadow: 0px 19px 40px -16px rgba(34, 60, 80, 0.2);
-    box-shadow: 0px 19px 40px -16px rgba(34, 60, 80, 0.2);
-}
-
-/* 245, 186, 91 */
-
-.btn1 {
-    background-color: rgb(245, 186, 91);
-}
-.btn1:hover {
-    background-color: rgb(248, 166, 101);
-}
-
-/* 248, 166, 101 */
-    </style>
     <title>Игра в слова</title>
+    <link rel="stylesheet"  type="text/css" href="{{url_for('.static', filename='style.css')}}">
 </head>
 
 <body>
@@ -49,7 +29,7 @@
     </nav>
 
     <div class="container">
-        <form action="/login" class="row g-3">
+        <form action="/game" class="row g-3">
             <h2>Войти в комнату</h2>
             <br>
             <div class="col-md-6">

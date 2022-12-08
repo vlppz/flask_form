@@ -4,7 +4,6 @@ from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
 
-codes = []
 last_id = '0'
 rooms = {}
 
@@ -18,13 +17,12 @@ def main_page():
 def getcode():
     global last_id
     last_id = ''.join([random.choice(string.ascii_lowercase+string.digits) for _ in range(10)])
-    codes.append(last_id)
     rooms.update({last_id: {'last_word': 'кот'}})
 
-    return redirect(f'/login?code={last_id}')
+    return redirect(f'/game?code={last_id}')
 
 
-@app.route('/login', methods=["POST", "GET"])
+@app.route('/game', methods=["POST", "GET"])
 def game():
     code = request.args['code']
     try:
