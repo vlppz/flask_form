@@ -2,26 +2,22 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-codes = {}
-c = 0
+codes = []
+last_id = 0
 
 @app.route("/")
 def index():
     return render_template("index.html")
 
+
 @app.route("/getcode", methods=['POST'])
 def getcode():
-    global codes
-    global c
+    global last_id
+    last_id += 1
+    codes.append(last_id)
 
-    codes.update({request.values.get("usrname"): c})
-    c+=1
+    return "Code:"+str(last_id)
 
-    print(codes)
-
-    return "Code:"+str(c)
-
-@app.route("/smsg")
 
 if __name__ == "__main__":
     app.run("127.0.0.1", 8080)
