@@ -19,7 +19,14 @@ def getcode():
     codes.append(last_id)
     rooms.update({last_id: {'last_word': 'кот'}})
 
-    return redirect('game.html')
+    return redirect(f'/ingame?code={last_id}')
+
+
+@app.route('/ingame', methods=["POST", "GET"])
+def game():
+    code = int(request.args['code'])
+    room = rooms[code]
+    return render_template('game.html', code=code)
 
 
 if __name__ == "__main__":
