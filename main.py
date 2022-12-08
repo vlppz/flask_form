@@ -1,36 +1,37 @@
+import random
+import string
 from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
 
 codes = []
-last_id = 0
+last_id = '0'
 rooms = {}
 
 
 @app.route("/")
-def index():
+def main_page():
     return render_template("index.html")
 
 
-@app.route("/strgame", methods=['POST'])
+@app.route("/start", methods=['POST', 'GET'])
 def getcode():
     global last_id
-    last_id += 1
+    last_id = ''.join([random.choice(string.ascii_lowercase+string.digits) for _ in range(10)])
     codes.append(last_id)
     rooms.update({last_id: {'last_word': 'кот'}})
 
-    return redirect(f'/ingame?code={last_id}')
+    return redirect(f'/login?code={last_id}')
 
 
-@app.route('/file/<path>')
-def file(path):
-    return open(path).read()
-
-
-@app.route('/ingame', methods=["POST", "GET"])
+@app.route('/login', methods=["POST", "GET"])
 def game():
-    code = int(request.args['code'])
-    room = rooms[code]
+    code = request.args['code']
+    try:
+        room = rooms[code]
+    except KeyError:
+        return '<h1>Error: No such Room!</h1><br>This room was closed or was never existing'
+
     return render_template('game.html', code=code)
 
 

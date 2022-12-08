@@ -28,7 +28,7 @@
 
 /* 248, 166, 101 */
     </style>
-    <title>Form</title>
+    <title>Игра в слова</title>
 </head>
 
 <body>
@@ -49,18 +49,23 @@
     </nav>
 
     <div class="container">
-        <form action="/strgame" method="post">
+        <form action="/login" class="row g-3">
+            <h2>Войти в комнату</h2>
+            <br>
+            <div class="col-md-6">
+            <input type="text" class="form-control" placeholder="Код" id="inp2" name="code">
+            </div>
+            <div class="col-md-6">
             <button class="btn btn1" type="sumbit">
-                Start a new game
+                Войти
             </button>
-        </form>
+            </div>
+        </form><br>
+        <h3>Или</h3><br>
 
-        <form action="/ingame" method="post">
-            <br>
-            <input type="text" class="form-control" placeholder="Code" id="inp2" name="code">
-            <br>
+        <form action="/start">
             <button class="btn btn1" type="sumbit">
-                Login
+                Создать новую комнату
             </button>
         </form>
     </div>
