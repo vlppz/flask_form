@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
 
@@ -20,6 +20,11 @@ def getcode():
     rooms.update({last_id: {'last_word': 'кот'}})
 
     return redirect(f'/ingame?code={last_id}')
+
+
+@app.route('/file/<path>')
+def file(path):
+    return open(path).read()
 
 
 @app.route('/ingame', methods=["POST", "GET"])
