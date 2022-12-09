@@ -16,6 +16,14 @@
     background-color: rgb(248, 166, 101);
 }
 
+.outlinebt {
+    outline: 2px solid rgb(245, 186, 91);
+    margin-left: 10px;
+}
+.outlinebt:hover {
+    background-color: rgb(245, 186, 91);
+}
+
 .sidebar span {
     padding: 10px;
 }
@@ -38,6 +46,11 @@
 .mm5 {
     margin-top: 18px;
     margin-bottom: -15px;
+}
+
+.mm6 {
+    margin-top: 4px;
+    margin-bottom: -32px;
 }
 
 /* 248, 166, 101 */

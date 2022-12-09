@@ -31,7 +31,7 @@
     <div class="row">
         <div class="col-2 sidebar " style="border-right: #ffe089 solid 1px">
             <span class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none">
-              <span class="fs-5 fw-semibold">Игра</span>
+              <p class="fs-5 fw-semibold mm6">Игра</p>
             </span>
             <span class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none">
                 Код команды: {{code}}<br>
@@ -42,6 +42,13 @@
                 Вы:
                 {{name}}
             </span>
+
+            <form action="/close/{{ session }}">
+                <button class="btn outlinebt" type="submit">
+                    Закрыть
+                </button>
+            </form>
+
         </div>
         <div class="col-7">
         <h1 class="mm4">Слова</h1>
