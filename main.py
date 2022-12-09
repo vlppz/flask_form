@@ -90,4 +90,4 @@ def game(code):
 
 
 if __name__ == "__main__":
-    app.run("192.168.50.38", 80)
+    app.run("127.0.0.1", 8080)
