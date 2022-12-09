@@ -11,15 +11,13 @@ sessions = {}
 errors = {
     '100': 'Игрок уже существует!',
     '101': 'Сессия была закрыта!',
-    '102': 'Не правильный код комнаты'
 }
 
 
 @app.route("/", methods=['POST', 'GET'])
 def main_page():
 
-    return render_template("index.html",
-                           error=errors[request.args['error']] if request.args.get('error', False) else '')
+    return render_template("index.html", error=errors[request.args['error']] if request.args.get('error', False) else '')
 
 
 @app.route('/close/<session>')
@@ -61,7 +59,8 @@ def login():
     try:
         room = rooms[code]
     except KeyError:
-        return redirect('/?error=102')
+        return '<h1>Ошибка: Не правильный код комнаты</h1><br>Эта комната была закрыта ее хозяином либо никогда не ' \
+               'существовала '
     if name not in room['users']:
         room['users'].append(name)
     else:
@@ -83,8 +82,7 @@ def game(code):
                'существовала'
     try:
         if sessions[name] == session:
-            return render_template('game.html', code=code, name=name, users=room['users'], words=room['words'],
-                                   session=session)
+            return render_template('game.html', code=code, name=name, users=room['users'], words=room['words'], session=session)
         else:
             return redirect('/')
     except KeyError:
@@ -92,4 +90,4 @@ def game(code):
 
 
 if __name__ == "__main__":
-    app.run("localhost", 80)
+    app.run("127.0.0.1", 8080)
