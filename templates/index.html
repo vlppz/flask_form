@@ -12,6 +12,11 @@
 </head>
 
 <body>
+    {% if error != '' %}
+    <div class="alert alert-danger" role="alert">
+    {{error}}
+    </div>
+    {% endif %}
     <nav class="navbar navbar-expand-lg bg-light nav1">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Игра в слова</a>
@@ -29,13 +34,16 @@
     </nav>
 
     <div class="container">
-        <form action="/game" class="row g-3">
+        <form action="/login" class="row g-3">
             <h2>Войти в комнату</h2>
             <br>
-            <div class="col-md-6">
+            <div class="col-md-2">
             <input type="text" class="form-control" placeholder="Код" id="inp2" name="code">
             </div>
-            <div class="col-md-6">
+            <div class="col-md-2">
+            <input type="text" class="form-control" placeholder="Ник" id="inp3" name="name">
+            </div>
+            <div class="col-md-2">
             <button class="btn btn1" type="sumbit">
                 Войти
             </button>
@@ -43,10 +51,16 @@
         </form><br>
         <h3>Или</h3><br>
 
-        <form action="/start">
+        <form action="/start" class="row g-3">
+            <br>
+            <div class="col-md-3">
+            <input type="text" class="form-control" placeholder="Ник" id="inp4" name="name">
+            </div>
+            <div class="col-md-2">
             <button class="btn btn1" type="sumbit">
-                Создать новую комнату
+                Создать комнату
             </button>
+            </div>
         </form>
     </div>
 
