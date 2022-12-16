@@ -5,86 +5,100 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css"
+        integrity="sha512-KXol4x3sVoO+8ZsWPFI/r5KBVB/ssCGB5tsv2nVOKwLg33wTFP3fmnXa47FdSVIshVTgsYk/1734xSk9aFIa4A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" type="text/css" href="{{url_for('.static', filename='style.css')}}">
     <title>Game</title>
 </head>
 
 <body>
     {% if error != '' %}
-    <div class="alert alert-danger" role="alert" style="margin: 0; border-radius: 0">
-        <div class="row">
-            <div class="col-11">{{error}}</div>
-            <div class="col-1" style="text-align: right">
-                <a href="/game/{{code}}?name={{name}}&session={{session}}" type="button" class="btn-close"
-                    aria-label="Закрыть"></a>
-            </div>
-        </div>
+    <div class="ui red message io1">
+        <div>{{error}}</div>
+        <a href="/game/{{code}}?name={{name}}&session={{session}}" type="button"
+            aria-label="Закрыть"><i class="icon close red"></i></a>
     </div>
     {% endif %}
-    <nav class="navbar navbar-expand-lg bg-light nav1">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Игра в слова</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                    <a class="nav-link" aria-current="page" href="/">Главная</a>
-                    <a class="nav-link active" href="#">Игра</a>
-                </div>
-            </div>
-        </div>
+    <nav class="ui stackable menu">
+        <div class="item green" href="#">Игра в слова</div>
+        <a class="item" aria-current="page" href="/">Главная</a>
+        <a class="item active" href="#">Игра</a>
     </nav>
 
-    <div class="row">
-        <div class="col-2 sidebar " style="border-right: #ffe089 solid 1px">
-            <span class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none">
-                <p class="fs-5 fw-semibold mm6">Игра</p>
-            </span>
-            <span class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none">
-                Код команды: {{code}}<br>
-                Участники:<br>
-                {% for u in users %}
-                {{u}}<br>
-                {% endfor %}
-                Вы:
-                {{name}}
-            </span>
-
-            <form action="/close/{{ session }}">
-                <button class="btn outlinebt" type="submit">
-                    Закрыть
-                </button>
-            </form>
-
-        </div>
-        <div class="col-7">
-            <h1 class="mm4">Слова</h1>
-            {% for word in words %}
-            <p class="mm5">{{word}}</p>
-            {% endfor %}
-            <form action="/game/{{code}}" class="row g-3">
-                <br>
-                <div class="col-md-3">
-                    <input type="text" class="form-control" placeholder="Слово" id="inp4" name="message">
-                    <input type="hidden" name="name" value="{{name}}" />
-                    <input type="hidden" name="session" value="{{session}}" />
-                </div>
-                <div class="col-md-2">
-                    <button class="btn btn1" type="sumbit">
-                        Отправить
+    <div class="container ml10">
+        <div class="ui vertical menu men1">
+            <div class="item">
+                <div class="header">Код команды</div>
+                <div class="ui action input">
+                    <input id="code1" type="text" value="{{code}}">
+                    <button id="copy" class="ui right teal labeled icon button" tabindex="0">
+                        <i id="icn1" class="copy icon"></i>
+                        <span class="text1">Copy</span>
                     </button>
                 </div>
+            </div>
+
+            <div class="item">
+                <div class="header">Участники</div>
+                <p>{% for u in users %}
+                    {{u}}<br>
+                    {% endfor %}</p>
+            </div>
+
+            <div class="item">
+                <form action="/close/{{ session }}">
+                    <button class="ui button inverted red" type="submit">
+                        Закрыть
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="c1">
+            <h1 class="header">Слова</h1>
+            {% for word in words %}
+            <p>{{word}}</p>
+            {% endfor %}
+            <form action="/game/{{code}}" class="row g-3">
+                <div class="ui input">
+                    <input placeholder="Слово" id="inp4" name="message">
+                </div>
+                <input type="hidden" name="name" value="{{name}}" />
+                <input type="hidden" name="session" value="{{session}}" />
+                <br>
+                <button class="ui button teal btn1" type="sumbit">
+                    Отправить
+                </button>
             </form>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+
+    <script>
+        $('#copy').click(function() {
+            navigator.clipboard.writeText($("#code1").val())
+            $('.text1').text("Copied")
+            $('#icn1').removeClass('copy')
+            $('#icn1').addClass('check')
+            $('#icn1').addClass('circle')
+            $('#copy').blur()
+            setTimeout(restoreicon, 1000)
+        })
+
+        function restoreicon() {
+            $('.text1').text("Copy")
+            $('#icn1').removeClass('check')
+            $('#icn1').removeClass('circle')
+            $('#icn1').addClass('copy')
+        }
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.js"
+        integrity="sha512-Xo0Jh8MsOn72LGV8kU5LsclG7SUzJsWGhXbWcYs2MAmChkQzwiW/yTQwdJ8w6UA9C6EVG18GHb/TrYpYCjyAQw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
 
 </html>
